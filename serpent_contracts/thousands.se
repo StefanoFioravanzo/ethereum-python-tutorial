@@ -1,0 +1,13 @@
+def get_confirmation():
+        #
+        # Returns a message confirming everything is working.
+        #
+
+        return "It works!"
+
+def add_thousand(n):
+        #
+        # Accepts an integer and returns the result of adding 1000 to it.
+        #
+
+        return n + 1000

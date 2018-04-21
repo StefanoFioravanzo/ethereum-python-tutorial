@@ -1,0 +1,17 @@
+def test_contract():
+    x = 5
+    log(x)
+    return "ciao"
+
+
+def print_int():
+    return 1000
+
+def print_string():
+    return "It Works!"
+
+def print_string_arg(s):
+    return s
+
+def return_sum(input1, input2):
+    return input1 + input2

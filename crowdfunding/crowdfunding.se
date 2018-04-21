@@ -1,0 +1,79 @@
+data recipient
+data goal
+data deadline
+data contrib_total
+data contrib_count
+data contribs[](sender, value)   # define infinite array
+
+def create_campaign(recipient:str, goal, timelimit):
+    # campaign already exists
+    if self.recipient:
+        return("Already initialized")
+    self.recipient = recipient
+    self.goal = goal
+    self.deadline = block.timestamp + timelimit
+    return self.recipient
+
+def contribute():
+    # TODO: add check to return is campaign was not initialized
+    # TODO: check for deadline before contributing
+    # Update contribution total
+    total_contributed = self.contrib_total + msg.value
+    self.contrib_total = total_contributed
+
+    # Record new contribution
+    sub_index = self.contrib_count
+    self.contribs[sub_index].sender = msg.sender
+    self.contribs[sub_index].value = msg.value
+    self.contrib_count = sub_index + 1
+
+    # Check if there is enough funding
+    if total_contributed >= self.goal:
+        send(self.recipient, total_contributed)
+        self.clear()  # Clear all variables
+        return(1)
+
+    # If expired, refund all contributors
+    if block.timestamp > self.deadline:
+        i = 0
+        c = self.contrib_count
+        while i < c:
+            send(self.contribs[i].sender, self.contribs[i].value)
+            i += 1
+        self.clear()
+        return(2)
+    return(self.contrib_total)
+
+def progress_report():
+    return(self.contrib_total)
+
+# Clearing function for internal use
+def clear():
+    if self == msg.sender:
+        self.recipient = 0
+        self.goal = 0
+        self.deadline = 0
+        c = self.contrib_count
+        self.contrib_count = 0
+        self.contrib_total = 0
+        i = 0
+        while i < c:
+            self.contribs[i].sender = 0
+            self.contribs[i].value = 0
+            i += 1
+
+def get_contrib_total():
+    return self.contrib_total
+
+def add_contrib():
+    total_contributed = self.contrib_total + msg.value
+    self.contrib_total = total_contributed
+
+def get_recipent():
+    return self.recipient
+
+def get_goal():
+    return self.goal
+
+def add(a, b):
+    return a+b

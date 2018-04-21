@@ -1,0 +1,10 @@
+data info[](title[100], titleLength)
+
+def saveTitle(id, title:str):
+  save(self.info[id].title[0],title,chars=len(title))
+  self.info[id].titleLength = len(title)
+  return(1)
+
+def getTitle(id):
+  length=self.info[id].titleLength
+  return( load(self.info[id].title[0],chars=length):str )
